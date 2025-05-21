@@ -7,7 +7,7 @@ namespace JobTracking.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-public class UserController : Controller
+public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
 

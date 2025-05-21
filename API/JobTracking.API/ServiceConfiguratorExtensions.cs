@@ -1,6 +1,7 @@
 ﻿using JobTracking.Application.Contracts;
 using JobTracking.Application.Contracts.Base;
 using JobTracking.Application.Implementation;
+using JobTracking.DataAccess;
 
 namespace JobTracking.API
 {

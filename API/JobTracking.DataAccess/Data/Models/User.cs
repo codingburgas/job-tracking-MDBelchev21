@@ -32,6 +32,9 @@ namespace JobTracking.DataAccess.Data.Models
         public UserRole Role { get; set; }
 
         public ICollection<Application> Applications { get; set; }
+        
+        public string Address { get; set; }
+        
     }
 
 }

@@ -1,4 +1,6 @@
-﻿namespace JobTracking.Application.Contracts.Base;
+﻿using JobTracking.DataAccess;
+
+namespace JobTracking.Application.Contracts.Base;
 
 public class DependencyProvider
 {

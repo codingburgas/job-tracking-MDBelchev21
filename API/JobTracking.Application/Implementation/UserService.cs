@@ -2,7 +2,8 @@
 using JobTracking.Application.Contracts.Base;
 using JobTracking.DataAccess.Data.Models;
 using JobTracking.Domain.DTOs.Response;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
 
 namespace JobTracking.Application.Implementation;
 
@@ -16,13 +17,18 @@ public class UserService : IUserService
 
     public async Task<UserResponseDTO> GetUserByIdAsync(int userId)
     {
-        var result = Provider.Db.Users.Where(u => u.Id == userId).Select(x => new UserResponseDTO()
-        {
-            Id = x.Id,
-            Name = x.Name,
-            Address = x.Address,
-            Honorarium = x.Honorarium,
-        }).FirstOrDefaultAsync();
-        return result;
+        var resultDTO = await Provider.Db.Users
+            .Where(u => u.Id == userId) // IQueryable<User>
+            .Select(x => new UserResponseDTO
+            {
+                Id = x.Id,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                MiddleName = x.MiddleName,
+                Address = x.Address,
+            })
+            .FirstOrDefaultAsync();
+
+        return resultDTO;
     }
 }
