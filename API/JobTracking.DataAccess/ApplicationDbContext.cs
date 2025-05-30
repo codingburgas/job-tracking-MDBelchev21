@@ -10,15 +10,13 @@ public class ApplicationDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Application> Applications { get; set; }
     public DbSet<JobPosting> JobPostings { get; set; }
+
     
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        
-    }
-    
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
-        
+        if (optionsBuilder.IsConfigured == false)
+        {
+            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=JobTrackingDB;Trusted_Connection=True;TrustServerCertificate=True;");
+        }
     }
 }

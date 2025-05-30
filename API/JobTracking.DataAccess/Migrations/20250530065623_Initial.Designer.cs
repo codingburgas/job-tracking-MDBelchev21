@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobTracking.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250521205800_Initial")]
+    [Migration("20250530065623_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
