@@ -1,0 +1,60 @@
+<div class="w-full max-w-4xl bg-white p-8 rounded-lg shadow-xl border border-gray-200">
+  <h2 class="text-4xl font-extrabold text-center text-indigo-800 mb-8 tracking-tight">
+    Welcome to Your Dashboard, {{ currentUser?.username }}!
+  </h2>
+
+  <div *ngIf="errorMessage" class="mt-4 p-3 rounded-md bg-red-100 text-red-700 text-sm text-center">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="currentUser">
+    <!-- Content for Admin/Employer Roles -->
+    <div *ngIf="currentUser.role === 'Admin' || currentUser.role === 'Employer'">
+      <!-- Search Bar - Moved to its own flex container for upper right alignment -->
+      <div class="flex justify-end mb-4"> <!-- This container pushes its content to the right -->
+        <div class="w-full sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4"> <!-- Adjusted width for the input -->
+          <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            (input)="applyFilter()"
+            placeholder="Search job postings (title, company, description, status)"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-base placeholder-gray-400"
+          />
+        </div>
+      </div>
+      <!-- End Search Bar -->
+
+      <h3 class="text-2xl font-semibold text-gray-800 mb-4">Your Job Postings ({{ jobPostings.length }})</h3>
+
+
+      <div *ngIf="jobPostings.length === 0" class="text-gray-600 text-center py-4">
+        No job postings found.
+      </div>
+      <div *ngIf="jobPostings.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let job of jobPostings" class="bg-blue-50 p-4 rounded-lg shadow-md border border-blue-200">
+          <h4 class="text-lg font-bold text-blue-800">{{ job.title }}</h4>
+          <p class="text-gray-700 text-sm mb-2">{{ job.companyName }}</p>
+          <p class="text-gray-600 text-xs">Posted: {{ job.datePosted | date:'shortDate' }}</p>
+          <p class="text-gray-600 text-xs">Status: <span class="font-medium text-blue-600">{{ job.status }}</span></p>
+          <p class="text-gray-600 text-sm mt-2 line-clamp-3">{{ job.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content for User Role -->
+    <div *ngIf="currentUser.role === 'User'">
+      <h3 class="text-2xl font-semibold text-gray-800 mb-4">Your Job Applications ({{ applications.length }})</h3>
+      <div *ngIf="applications.length === 0" class="text-gray-600 text-center py-4">
+        No job applications found.
+      </div>
+      <div *ngIf="applications.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let app of applications" class="bg-green-50 p-4 rounded-lg shadow-md border border-green-200">
+          <h4 class="text-lg font-bold text-green-800">{{ app.jobTitle }}</h4>
+          <p class="text-gray-700 text-sm mb-2">Applied: {{ app.applicationDate | date:'shortDate' }}</p>
+          <p class="text-gray-600 text-xs">Status: <span class="font-medium text-green-600">{{ app.status }}</span></p>
+          <p class="text-gray-600 text-sm mt-2 line-clamp-3">{{ app.coverLetter }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
