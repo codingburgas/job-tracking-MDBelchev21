@@ -18,6 +18,6 @@ public class JobFilter : IFilter
 
     public DateTime DatePosted { get; set; }
 
-    public JobStatus Status { get; set; }
+    public JobStatus? Status { get; set; }
     
 }

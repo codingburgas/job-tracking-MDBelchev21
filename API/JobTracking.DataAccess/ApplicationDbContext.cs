@@ -11,12 +11,38 @@ public class ApplicationDbContext : DbContext
     public DbSet<Application> Applications { get; set; }
     public DbSet<JobPosting> JobPostings { get; set; }
 
-    
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
     {
-        if (optionsBuilder.IsConfigured == false)
-        {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=JobTrackingDB;Trusted_Connection=True;TrustServerCertificate=True;");
-        }
+        
+    }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        
+        modelBuilder.Entity<User>()
+            .HasMany(u => u.Applications)
+            .WithOne(a => a.User)
+            .HasForeignKey(a => a.UserId);
+        
+        modelBuilder.Entity<User>()
+            .HasMany(u => u.PostedJobPostings)
+            .WithOne(jp => jp.User)
+            .HasForeignKey(jp => jp.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        modelBuilder.Entity<JobPosting>()
+            .HasMany(jp => jp.Applications)
+            .WithOne(a => a.JobPosting)
+            .HasForeignKey(a => a.JobPostingId);
+        
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Username)
+            .IsUnique();
+
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Email)
+            .IsUnique();
     }
 }

@@ -19,4 +19,8 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\JobTracking.Domain\JobTracking.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

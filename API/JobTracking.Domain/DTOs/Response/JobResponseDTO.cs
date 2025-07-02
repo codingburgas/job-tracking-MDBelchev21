@@ -1,22 +1,14 @@
-﻿namespace JobTracking.Domain.DTOs.Response;
+﻿using JobTracking.Domain.Enums;
+namespace JobTracking.Domain.DTOs.Response;
 
-public enum JobStatus
-{
-    Active,
-    Inactive
-}
 
-public class JobResponseDTO
+
+public class JobResponseDto
 {
     public int Id { get; set; }
-
-    public string Title { get; set; }
-    
-    public string CompanyName { get; set; }
-    
-    public string Description { get; set; }
-
+    public string Title { get; set; } = string.Empty;
+    public string CompanyName { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
     public DateTime DatePosted { get; set; }
-
-    public JobStatus Status { get; set; }
+    public string Status { get; set; }
 }

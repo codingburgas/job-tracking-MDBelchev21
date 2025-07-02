@@ -1,3 +1,15 @@
-<div class="alert alert-primary" role="alert">
-  A simple primary alert—check it out!
+<div class="min-h-screen bg-gray-100 flex flex-col items-center justify-center font-sans p-4">
+  <nav class="w-full max-w-4xl bg-white p-4 rounded-lg shadow-md flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-indigo-700">JobTracker</h1>
+    <div *ngIf="authService.isLoggedIn()" class="flex items-center space-x-4">
+      <span class="text-gray-700">Welcome, {{ authService.getCurrentUser()?.username }} ({{ authService.getCurrentUser()?.role }})!</span>
+      <a routerLink="/dashboard" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-200">Dashboard</a>
+      <button (click)="authService.logout()" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-200">Logout</button>
+    </div>
+    <div *ngIf="!authService.isLoggedIn()" class="flex space-x-4">
+      <a routerLink="/login" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-200">Login</a>
+      <a routerLink="/register" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors duration-200">Register</a>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
 </div>

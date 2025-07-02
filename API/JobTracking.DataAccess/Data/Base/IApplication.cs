@@ -19,7 +19,6 @@ namespace JobTracking.DataAccess.Data.Base
         int Id { get; set; }
 
         int UserId { get; set; }
-        int JobPostingId { get; set; }
 
         ApplicationStatus Status { get; set; }
     }

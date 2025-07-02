@@ -1,6 +1,6 @@
 ﻿using JobTracking.DataAccess;
 
-namespace JobTracking.Application.Contracts.Base;
+namespace JobTracking.App.Contracts.Base;
 
 public class DependencyProvider
 {

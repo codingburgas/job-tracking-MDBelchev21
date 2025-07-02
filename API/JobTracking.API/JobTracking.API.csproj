@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.15">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -15,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JobTracking.Application\JobTracking.Application.csproj" />
+    <ProjectReference Include="..\JobTracking.App\JobTracking.App.csproj" />
     <ProjectReference Include="..\JobTracking.DataAccess\JobTracking.DataAccess.csproj" />
     <ProjectReference Include="..\JobTracking.Domain\JobTracking.Domain.csproj" />
   </ItemGroup>
