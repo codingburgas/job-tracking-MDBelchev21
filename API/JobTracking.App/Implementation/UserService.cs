@@ -34,27 +34,22 @@ public class UserService : IUserService
             {
                 if (!string.IsNullOrEmpty(filter.Username))
                 {
-                    // FIX: Ensure both sides are ToLower() for Contains
                     users = users.Where(u => u.Username.ToLower().Contains(filter.Username.ToLower()));
                 }
                 if (!string.IsNullOrEmpty(filter.Email))
                 {
-                    // FIX: Ensure both sides are ToLower() for Contains
                     users = users.Where(u => u.Email.ToLower().Contains(filter.Email.ToLower()));
                 }
                 if (!string.IsNullOrEmpty(filter.FirstName))
                 {
-                    // FIX: Ensure both sides are ToLower() for Contains
                     users = users.Where(u => u.FirstName.ToLower().Contains(filter.FirstName.ToLower()));
                 }
                 if (!string.IsNullOrEmpty(filter.LastName))
                 {
-                    // FIX: Ensure both sides are ToLower() for Contains
                     users = users.Where(u => u.LastName.ToLower().Contains(filter.LastName.ToLower()));
                 }
                 if (!string.IsNullOrEmpty(filter.Role))
                 {
-                    // This part is fine as Enum.TryParse handles string comparison and then it's enum equality.
                     if (Enum.TryParse(filter.Role, true, out UserRole roleEnum))
                     {
                         users = users.Where(u => u.Role == roleEnum);

@@ -23,7 +23,6 @@ public class AuthService : IAuthService
 
         public async Task<User> AuthenticateUser(string usernameOrEmail, string password)
         {
-            // FIX: Use ToLower() for case-insensitive comparison in the query
             var lowerCaseUsernameOrEmail = usernameOrEmail.ToLower();
             var user = await _context.Users
                            .FirstOrDefaultAsync(u => u.Username.ToLower() == lowerCaseUsernameOrEmail ||
@@ -60,19 +59,16 @@ public class AuthService : IAuthService
 
         public bool VerifyPassword(string computedHash, string storedHash)
         {
-            // This is a string comparison, not a LINQ query, so OrdinalIgnoreCase is fine here.
             return computedHash.Equals(storedHash, StringComparison.OrdinalIgnoreCase);
         }
 
         public bool CheckUserNameAvailability(string username)
         {
-            // FIX: Use ToLower() for case-insensitive comparison
             return _context.Users.Any(u => u.Username.ToLower() == username.ToLower());
         }
 
         public bool CheckEmailAvailability(string email)
         {
-            // FIX: Use ToLower() for case-insensitive comparison
             return _context.Users.Any(u => u.Email.ToLower() == email.ToLower());
         }
     }

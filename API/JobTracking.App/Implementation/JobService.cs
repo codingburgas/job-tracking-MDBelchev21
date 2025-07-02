@@ -18,7 +18,7 @@ public class JobService : IJobService
 {
     private readonly ApplicationDbContext _context;
     
-    public JobService(ApplicationDbContext context) // <--- FINAL CHANGE: Constructor takes DbContext directly
+    public JobService(ApplicationDbContext context)
     {
         _context = context;
     }
@@ -115,7 +115,7 @@ public class JobService : IJobService
         job.Title = dto.Title;
         job.CompanyName = dto.CompanyName;
         job.Description = dto.Description;
-        job.Status = dto.Status.ToString(); // Convert enum to string for storage
+        job.Status = dto.Status;
         job.UserId = dto.UserId;
 
         await _context.SaveChangesAsync();

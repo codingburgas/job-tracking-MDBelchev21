@@ -17,7 +17,6 @@ namespace JobTracking.API
 
         public static void AddIdentity(this WebApplicationBuilder builder)
         {
-            // Uncommented and configured JWT Authentication
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -32,8 +31,7 @@ namespace JobTracking.API
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
                     };
                 });
-
-            // Add Authorization policies if needed
+            
             builder.Services.AddAuthorization(options =>
             {
                 options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));

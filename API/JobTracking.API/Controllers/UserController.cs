@@ -39,8 +39,7 @@ public class UsersController : ControllerBase
         {
             return Unauthorized("Invalid username/email or password.");
         }
-
-        // No token generation here
+        
         return Ok(new LoginResponseDto
         {
             UserId = user.Id,
@@ -151,8 +150,7 @@ public class UsersController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-
-        // The User.IsInRole check relies on authentication context from a scheme
+        
         if (User.IsInRole(UserRole.User.ToString()) && id != GetCurrentUserId())
         {
             return Forbid("You do not have permission to update this user's profile.");

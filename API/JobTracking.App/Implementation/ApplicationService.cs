@@ -85,7 +85,6 @@ public class ApplicationService : IApplicationService
             }
             if (!string.IsNullOrEmpty(filter.Status))
             {
-                // FIX: Changed to ToLower() for translatability
                 query = query.Where(a => a.Status.ToLower().Contains(filter.Status.ToLower()));
             }
         }

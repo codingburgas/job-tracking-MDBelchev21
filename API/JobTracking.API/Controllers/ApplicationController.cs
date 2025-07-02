@@ -38,14 +38,13 @@ public class ApplicationsController : ControllerBase
         var userId = GetCurrentUserId();
         if (userId <= 0)
         {
-            // This scenario implies unauthenticated access attempting to apply
             return Unauthorized("User is not authenticated or user ID cannot be determined.");
         }
 
         try
         {
             var application = await _applicationService.ApplyForJobAsync(userId, request);
-            var responseDto = await _applicationService.GetApplicationByIdAsync(application.Id); // Fetch full DTO with job/user names
+            var responseDto = await _applicationService.GetApplicationByIdAsync(application.Id);
             return CreatedAtAction(nameof(GetApplication), new { id = responseDto.Id }, responseDto);
         }
         catch (InvalidOperationException ex)

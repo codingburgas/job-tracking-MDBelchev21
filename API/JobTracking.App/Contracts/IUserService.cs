@@ -7,7 +7,7 @@ namespace JobTracking.App.Contracts;
 public interface IUserService
 {
     Task<IEnumerable<User>> GetAllUsersAsync(UserFilter filter = null);
-    Task<UserResponseDto> GetUserByIdAsync(int id); // Updated to UserResponseDto
+    Task<UserResponseDto> GetUserByIdAsync(int id);
     Task<User> GetUserByUsernameOrEmailAsync(string usernameOrEmail);
     Task<User> AddUserAsync(User user);
     Task<User> UpdateUserAsync(User user);

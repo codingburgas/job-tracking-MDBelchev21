@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Text.Json.Serialization; // <--- ADD THIS USING
+using System.Text.Json.Serialization;
 
 namespace JobTracking.API
 {
@@ -13,15 +13,14 @@ namespace JobTracking.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
+            
             builder.AddContext();
             builder.AddIdentity();
             builder.AddCors();
             builder.AddServices();
 
             builder.Services.AddControllers()
-                .AddJsonOptions(options => // <--- ADD THIS BLOCK
+                .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 });
@@ -33,8 +32,7 @@ namespace JobTracking.API
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
+            
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
